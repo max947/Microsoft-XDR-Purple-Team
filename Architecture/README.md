@@ -5,3 +5,24 @@ This section documents the engineering effort required to build the bridge betwe
 ### 🗺️ Network Topology
 <img width="1967" height="978" alt="image" src="https://github.com/user-attachments/assets/8733f59f-2f3a-4c42-93b7-1c2a26e678ce" />
 Note: This environment is configured on the 192.168.58.0/24 subnet for environment isolation.
+
+⚙️ Technical Implementation
+🔹 1. Azure Arc Integration
+Hybrid Management: Successfully onboarded DC01, DC02, and DC03 as Azure Arc-enabled servers.
+
+Centralized Governance: Integration with Arc allows for the application of Azure-native security policies and monitoring to the local VMware-hosted infrastructure.
+
+<img width="1898" height="519" alt="image" src="https://github.com/user-attachments/assets/ec2c60cd-87b1-4e5e-a3d5-17ded000db17" />
+
+
+🔹 2. AMA & DCR Configuration
+Azure Monitor Agent (AMA): Deployed the AMA across all lab assets to facilitate high-speed, secure telemetry streaming.
+
+Data Collection Rules (DCR): Engineered granular DCRs to filter and stream high-value Windows Event Logs (e.g., 4624 for Logons, 4662 for AD Object Access) into the Microsoft Sentinel workspace.
+
+[PRO TIP: Upload and link your "Data Collection Rule" configuration screenshot here]
+
+🔹 3. Microsoft XDR Sensor Deployment
+Defender for Identity (MDI): Operationalized MDI sensors on all Domain Controllers. Configured Directory Service Accounts (GMSA) to allow the sensors to parse and monitor AD identity traffic.
+
+Defender for Endpoint (MDE): Onboarded the workstation fleet and member servers via local scripts to provide deep EDR visibility into host-level process and network events.
