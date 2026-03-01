@@ -35,6 +35,7 @@ Defender for Endpoint (MDE): Onboarded the workstation fleet and member servers 
 ✅ Connectivity Verification
 To ensure the integrity of the telemetry pipeline, I executed a Heartbeat query in Microsoft Sentinel. This confirms that the Azure Monitor Agent (AMA) is successfully communicating with the cloud from all five local GOAD virtual machines.
 
+kusto. 
 // Heartbeat check to verify all lab assets are communicating with Azure
 Heartbeat
 | where TimeGenerated > ago(24h)
