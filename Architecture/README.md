@@ -31,3 +31,15 @@ Defender for Identity (MDI): Operationalized MDI sensors on all Domain Controlle
 
 Defender for Endpoint (MDE): Onboarded the workstation fleet and member servers via local scripts to provide deep EDR visibility into host-level process and network events.
 <img width="1914" height="905" alt="image" src="https://github.com/user-attachments/assets/094a356a-5368-4697-ae7f-030364af2012" />
+
+✅ Connectivity Verification
+To ensure the integrity of the telemetry pipeline, I executed a Heartbeat query in Microsoft Sentinel. This confirms that the Azure Monitor Agent (AMA) is successfully communicating with the cloud from all five local GOAD virtual machines.
+
+// Heartbeat check to verify all lab assets are communicating with Azure
+Heartbeat
+| where TimeGenerated > ago(24h)
+| summarize LastContact = max(TimeGenerated) by Computer, Category, OSType
+| order by LastContact desc
+
+<img width="1573" height="646" alt="image" src="https://github.com/user-attachments/assets/d315f9ad-ba6f-49a0-ae9e-d0afa3f1b025" />
+
