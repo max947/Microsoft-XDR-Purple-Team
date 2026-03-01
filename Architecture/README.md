@@ -29,7 +29,7 @@ Defender for Identity (MDI): Operationalized MDI sensors on all Domain Controlle
 
 
 
-# 4.Defender for Endpoint (MDE): Onboarded the workstation fleet and member servers via local scripts to provide deep EDR visibility into host-level process and network events.
+🔹 4. Defender for Endpoint (MDE): Onboarded the workstation fleet and member servers via local scripts to provide deep EDR visibility into host-level process and network events.
 <img width="1914" height="905" alt="image" src="https://github.com/user-attachments/assets/094a356a-5368-4697-ae7f-030364af2012" />
 
 
