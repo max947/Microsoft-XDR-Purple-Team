@@ -49,3 +49,6 @@ Heartbeat
 | where TimeGenerated > ago(24h)
 | summarize LastContact = max(TimeGenerated) by Computer, Category, OSType
 | order by LastContact desc
+
+<img width="1908" height="857" alt="image" src="https://github.com/user-attachments/assets/f5ec16cd-f35b-4ea6-822c-38214abe6312" />
+
