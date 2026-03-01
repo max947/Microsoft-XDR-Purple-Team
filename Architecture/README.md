@@ -25,7 +25,8 @@ Data Collection Rules (DCR): Engineered granular DCRs to filter and stream high-
 
 🔹 3. Microsoft XDR Sensor Deployment
 Defender for Identity (MDI): Operationalized MDI sensors on all Domain Controllers. Configured Directory Service Accounts (GMSA) to allow the sensors to parse and monitor AD identity traffic.
-<img width="1914" height="951" alt="image" src="https://github.com/user-attachments/assets/ba33f0c3-19f5-4325-a364-6260a6bf4b0d" />
+<img width="1908" height="952" alt="image" src="https://github.com/user-attachments/assets/5f94db28-3aeb-4c43-ac43-b95e65c8e161" />
+
 
 
 Defender for Endpoint (MDE): Onboarded the workstation fleet and member servers via local scripts to provide deep EDR visibility into host-level process and network events.
