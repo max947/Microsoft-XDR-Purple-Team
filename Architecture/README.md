@@ -20,7 +20,8 @@ Azure Monitor Agent (AMA): Deployed the AMA across all lab assets to facilitate 
 
 Data Collection Rules (DCR): Engineered granular DCRs to filter and stream high-value Windows Event Logs (e.g., 4624 for Logons, 4662 for AD Object Access) into the Microsoft Sentinel workspace.
 
-[PRO TIP: Upload and link your "Data Collection Rule" configuration screenshot here]
+<img width="1917" height="721" alt="image" src="https://github.com/user-attachments/assets/8e7a8456-2bd6-46be-9584-b238a62bd1ea" />
+
 
 🔹 3. Microsoft XDR Sensor Deployment
 Defender for Identity (MDI): Operationalized MDI sensors on all Domain Controllers. Configured Directory Service Accounts (GMSA) to allow the sensors to parse and monitor AD identity traffic.
