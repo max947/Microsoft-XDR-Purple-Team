@@ -60,3 +60,4 @@ Technical Evidence: The portal identified that ntoskrnl.exe opened the Windows R
 
 📸 Evidence: Defender XDR Behavioral Alert
 <img width="1915" height="953" alt="image" src="https://github.com/user-attachments/assets/8f3caa6e-502f-40dc-bf99-505946d79400" />
+Defender XDR alert story showing the process tree and the detection of LSA secrets theft on CASTELBLACK.
