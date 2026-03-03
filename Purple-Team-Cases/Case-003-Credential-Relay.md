@@ -45,3 +45,18 @@ DPAPI Information: Successfully retrieved DPAPI master keys, enabling the decryp
 
 📸 Evidence: Secretsdump Output via SOCKS
 <img width="1912" height="850" alt="image" src="https://github.com/user-attachments/assets/70693eec-0ace-45fd-b5c0-c8214d6955a1" />
+
+🛡️ Blue Team: Detection & Analysis
+1. XDR Incident: LSA Secrets Theft Detection
+The execution of secretsdump against CASTELBLACK triggered multiple high-fidelity alerts in the Microsoft 365 Defender portal.
+
+Alert Name: Indication of local security authority secrets theft.
+
+Alert Name: Compromised account conducting hands-on-keyboard attack.
+
+Detection Source: Endpoint Detection and Response (EDR).
+
+Technical Evidence: The portal identified that ntoskrnl.exe opened the Windows Remote Registry Service named pipe (winreg), a behavior directly associated with remote credential dumping tools.
+
+📸 Evidence: Defender XDR Behavioral Alert
+<img width="1915" height="953" alt="image" src="https://github.com/user-attachments/assets/8f3caa6e-502f-40dc-bf99-505946d79400" />
