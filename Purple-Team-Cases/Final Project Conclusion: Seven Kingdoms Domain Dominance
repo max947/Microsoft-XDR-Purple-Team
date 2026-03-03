@@ -1,15 +1,37 @@
-Phase,Methodology,Tools Used,Impact
-Initial Access,Kerberoasting / AS-REP Roasting,GetUserSPNs.py,Compromised jon.snow
-Lateral Movement,SMB Relay via SOCKS,ntlmrelayx.py,Admin Access on CASTELBLACK
-Privilege Esc.,sAMAccountName Spoofing,renameMachine.py,Exploited CVE-2021-42278
-Domain Dominance,DCSync / NTDS Dumping,secretsdump.py,Full Domain Credential Extraction
-App Exploitation,MSSQL xp_cmdshell RCE,mssqlclient.py,OS-level code execution as sql_svc
-Persistence,Golden Ticket Forgery,ticketer.py,Undocumented Domain Access
+# 🛡️ APT Lifecycle Simulation – Hybrid Windows Environment
 
+This assessment simulated an advanced persistent threat (APT) lifecycle within a hybrid Windows environment, validating the detection and response capabilities of the Microsoft 365 Defender stack.
 
-### Remediation & Hardening
-Enforce SMB Signing: Stops the relay attacks used to pivot across servers.
+---
 
-Rotate KRBTGT: A double-reset of the krbtgt password is now required to invalidate forged tickets.
+## 🔴 Red Team: Attack Lifecycle Matrix
 
-Tiered Administration: Ensure high-privileged accounts never log in to lower-tier workstations.
+| Phase             | Methodology                        | Tools & CVEs          | Impact                                                                 |
+|-------------------|------------------------------------|-----------------------|------------------------------------------------------------------------|
+| Initial Access    | Kerberoasting / AS-REP Roasting    | GetUserSPNs.py        | Compromised **jon.snow** account via offline hash cracking.             |
+| Lateral Movement  | SMB Relay via SOCKS Proxy          | ntlmrelayx.py         | Full Administrative Access to **CASTELBLACK** by relaying NTLM sessions.|
+| Privilege Esc.    | sAMAccountName Spoofing            | CVE-2021-42278        | Exploited KDC validation flaws to impersonate Domain Controller.        |
+| Domain Dominance  | DCSync / NTDS Dumping              | secretsdump.py        | Extracted all domain NTLM hashes, including **Administrator** & **krbtgt**. |
+| App Exploitation  | MSSQL xp_cmdshell RCE              | mssqlclient.py        | OS-level code execution on DB tier as **sql_svc** account.              |
+| Persistence       | Kerberos Golden Ticket             | ticketer.py           | Forged long-term TGT for permanent domain resource access.              |
+
+---
+
+## 🔵 Blue Team: Detection & XDR Validation
+
+- **Identity Detections (MDI):** Alerted on *Suspected sAMAccountName spoofing* and *Possible Kerberoasting LDAP reconnaissance*.  
+- **Endpoint Detections (EDR):** Flagged *Indication of local security authority secrets theft* during secretsdump on CASTELBLACK.  
+- **Incident Correlation:** Unified alert story linking CVE-2021-42278 (account renaming) with CVE-2021-42287 (suspicious TGS requests).  
+
+---
+
+## ⚙️ Security Controls & Recommendations
+
+| Security Control       | Recommendation                                                   | Objective                                                                 |
+|------------------------|-----------------------------------------------------------------|---------------------------------------------------------------------------|
+| Enforce SMB Signing    | Enable **"Digitally sign communications (always)"** via GPO.    | Prevents NTLM relay attacks used for lateral movement.                    |
+| Rotate KRBTGT Key      | Perform double-reset of **krbtgt** account password.            | Invalidates all forged Golden Tickets.                                    |
+| Tiered Admin Model     | Restrict Domain Admin logins to **Tier 0 (DCs)** only.          | Prevents credential harvesting from lower-security workstations.          |
+| Zero Quota Policy      | Set **ms-DS-MachineAccountQuota = 0**.                          | Stops standard users from creating machine accounts for spoofing attacks. |
+
+---
