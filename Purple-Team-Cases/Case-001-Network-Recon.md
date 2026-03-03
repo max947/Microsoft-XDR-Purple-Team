@@ -12,11 +12,24 @@ The attacker initiated an aggressive service and script scan to map the internal
 > **<img width="1919" height="1020" alt="image" src="https://github.com/user-attachments/assets/a540b80a-04f5-4159-a94b-3531f207a2b6" />
 **
 
-### **2. Domain Metadata Harvesting (NetExec)**
-Following the initial scan, **NetExec (nxc)** was utilized to enumerate the `sevenkingdoms.local` forest structure and identify hosts with SMB signing disabled.
-* **Command**: `nxc smb 192.168.58.0/24`
+### **Domain Metadata Harvesting (NetExec)
+Following the initial port scan, NetExec (nxc) was utilized to perform unauthenticated enumeration across the .58 subnet to map the sevenkingdoms.local forest structure and identify misconfigurations.
 
-> **[INSERT YOUR NXC SCREENSHOT HERE]**
+Command: nxc smb 192.168.58.0/24
+
+Objective: Enumerate domain names, OS versions, and SMB Signing status to identify potential relay targets.
+
+Key Findings:
+
+Forest Mapping: Successfully mapped three distinct domains: sevenkingdoms.local, north.sevenkingdoms.local, and essos.local.
+
+Vulnerability Identification: Identified BRAAVOS (192.168.58.23) and CASTELBLACK (192.168.58.22) with SMB Signing Disabled (signing:False), making them prime targets for NTLM Relay attacks.
+
+Legacy Protocols: Detected SMBv1 enabled on multiple targets (e.g., MEEREEN, BRAAVOS), significantly increasing the attack surface.
+
+📸 Evidence: NetExec Enumeration Results
+<img width="1920" height="215" alt="image" src="https://github.com/user-attachments/assets/5b1ac58a-16bd-4b66-94ee-fba1d676b550" />
+**
 
 ---
 
