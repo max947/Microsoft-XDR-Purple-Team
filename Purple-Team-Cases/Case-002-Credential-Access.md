@@ -70,3 +70,15 @@ Result: CRACKED — Password recovered: iknownothing
 
 <img width="1920" height="244" alt="image" src="https://github.com/user-attachments/assets/016f8703-8d61-49e0-909e-a059c785f6fa" />
 
+🛡️ Blue Team: Detection & Analysis
+1. Defender XDR Incident: Identity Escalation
+The Microsoft Defender for Identity sensor flagged the entire Kerberoasting lifecycle in real-time.
+
+Alert 1: Possible Kerberoasting LDAP reconnaissance: Triggered when the attacker queried for service principal names (SPNs).
+
+Alert 2: Suspected Kerberos SPN exposure: Triggered during the ticket harvesting phase.
+
+Alert 3: Possible Kerberoasting attack: The final correlated alert confirming the attack intent.
+
+📸 Evidence: Defender for Identity High-Severity Alerts
+<img width="1916" height="358" alt="image" src="https://github.com/user-attachments/assets/65a298b3-0ec8-4cd5-95ef-2ac6a6f1d09a" />
