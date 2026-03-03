@@ -47,3 +47,30 @@ Vulnerability Identification: Confirmed BRAAVOS and CASTELBLACK have SMB Signing
 
 📸 Evidence: Credential Leak & User Enumeration
 <img width="1920" height="411" alt="image" src="https://github.com/user-attachments/assets/dca5cbbd-2de5-46ea-996c-79e3042f1edd" />
+
+Gemini said
+Based on your latest screenshot (image_64e016.png), you have transitioned from simple user harvesting to Share Enumeration using a Null Session/Guest access strategy. This is a critical step in a "Purple Team" exercise as it identifies where an attacker can read or write data without needing valid domain credentials.
+
+Below is the copy-paste-ready Markdown for Section 4 of your Case-001-Network-Recon.md file.
+
+### 4. Unauthenticated Share Enumeration (NetExec)
+To identify potential data exfiltration points or lateral movement vectors, NetExec (nxc) was used to scan the network for accessible SMB shares using a null/guest user session.
+
+Command: nxc smb 192.168.58.10-23 -u 'a' -p '' --shares
+
+Objective: Identify shares with READ or READ/WRITE permissions accessible to unauthenticated or guest users.
+
+Key Findings:
+
+Guest Access Identified: Successfully gained (Guest) access to BRAAVOS (192.168.58.23) and CASTELBLACK (192.168.58.22).
+
+Sensitive Share Exposure:
+
+Identified a public share on BRAAVOS with READ access for all domain users.
+
+Discovered an all share with READ,WRITE permissions on both vulnerable hosts, providing a high-risk vector for malware deployment or data tampering.
+
+Administrative Exposure: Verified that standard administrative shares (C$, ADMIN$, IPC$) are visible, though restricted, confirming the targets are Windows-based systems.
+
+📸 Evidence: Unauthenticated Share Discovery
+<img width="1912" height="643" alt="image" src="https://github.com/user-attachments/assets/47081218-671a-4501-933b-f5bd0e652c79" />
