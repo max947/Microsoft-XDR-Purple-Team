@@ -1,6 +1,6 @@
 ## Case 003: Credential Relay (LLMNR Poisoning & SMB Relay)
 Red Team: Attack Simulation
-1. LLMNR/mDNS Poisoning (Responder)
+### 1. LLMNR/mDNS Poisoning (Responder)
 The attacker deployed Responder to listen for broadcast name resolution requests. By spoofing responses for non-existent resources like Bravos.local and Meren.local, the attacker forced victim workstations to attempt authentication against the attacker-controlled machine.
 
 Command: sudo responder -I vmnet5
@@ -61,3 +61,18 @@ Technical Evidence: The portal identified that ntoskrnl.exe opened the Windows R
 📸 Evidence: Defender XDR Behavioral Alert
 <img width="1915" height="953" alt="image" src="https://github.com/user-attachments/assets/8f3caa6e-502f-40dc-bf99-505946d79400" />
 Defender XDR alert story showing the process tree and the detection of LSA secrets theft on CASTELBLACK.
+
+### 4. 4. Interactive File System Access (smbclient)
+To demonstrate the practical impact of the administrative access gained via the SOCKS proxy, an interactive SMB session was established to explore the target's restricted file systems.
+
+Command: proxychains smbclient.py -no-pass 'NORTH'/'EDDARD.STARK'@192.168.58.22
+
+Technique: SMB/Windows Admin Shares (T1021.002).
+
+Result: Successfully authenticated and accessed the C$ administrative share on CASTELBLACK (192.168.58.22).
+
+Impact: The attacker has the ability to read/write system files, upload malicious binaries for persistence, or exfiltrate sensitive data directly from the system drive.
+
+📸 Evidence: Remote File System Access via Proxychains
+<img width="1500" height="755" alt="image" src="https://github.com/user-attachments/assets/b707a7ea-e839-4608-b614-65ba4acb4900" />
+
