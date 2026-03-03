@@ -1,4 +1,4 @@
-# 🏛️ Case 004: Privilege Escalation (sAMAccountName Spoofing)
+# 🏛️ Case 004: Privilege Escalation (sAMAccountName Spoofing CVE-2021-42278)
 📑 Executive Summary
 Objective:The primary objective of this case is to escalate privileges from a standard domain user (jon.snow) to a Domain Administrator by exploiting a logical flaw in how Active Directory validates computer account names and Kerberos tickets.
 
