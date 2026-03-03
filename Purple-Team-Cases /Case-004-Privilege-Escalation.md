@@ -1,11 +1,8 @@
-# 🏛️ Case 004: Privilege Escalation (Resource-Based Constrained Delegation)
+# 🏛️ Case 004: Privilege Escalation (sAMAccountName Spoofing)
 📑 Executive Summary
-Objective: To escalate privileges from a standard domain user to a local administrator on a target server by exploiting the MachineAccountQuota and Resource-Based Constrained Delegation (RBCD).
+Objective:The primary objective of this case is to escalate privileges from a standard domain user (jon.snow) to a Domain Administrator by exploiting a logical flaw in how Active Directory validates computer account names and Kerberos tickets.
 
-Scenario: The attacker uses the compromised jon.snow account to create a new machine account and configures it to act on behalf of other identities to impersonate a Domain Admin.
-
-Attack Tools: NetExec (nxc), impacket-addcomputer, and impacket-rbcd.
-
+Attack Tools: NetExec (nxc), impackets
 ⚔️ Red Team: Attack Simulation
 1. Exploiting MachineAccountQuota (T1087.002)
 The attacker verified that any domain user can add up to 10 machine accounts to the domain.
