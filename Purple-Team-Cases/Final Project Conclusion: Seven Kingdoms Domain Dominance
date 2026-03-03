@@ -1,1 +1,7 @@
-
+Phase,Methodology,Tools Used,Impact
+Initial Access,Kerberoasting / AS-REP Roasting,GetUserSPNs.py,Compromised jon.snow
+Lateral Movement,SMB Relay via SOCKS,ntlmrelayx.py,Admin Access on CASTELBLACK
+Privilege Esc.,sAMAccountName Spoofing,renameMachine.py,Exploited CVE-2021-42278
+Domain Dominance,DCSync / NTDS Dumping,secretsdump.py,Full Domain Credential Extraction
+App Exploitation,MSSQL xp_cmdshell RCE,mssqlclient.py,OS-level code execution as sql_svc
+Persistence,Golden Ticket Forgery,ticketer.py,Undocumented Domain Access
