@@ -77,3 +77,17 @@ Result: A final Service Ticket (TGS) was saved as administrator@CIFS_winterfell.
 
 Impact: The attacker now possesses an authenticated Kerberos session that grants full administrative access to the filesystem (CIFS) of the Domain Controller.
 <img width="1919" height="1024" alt="image" src="https://github.com/user-attachments/assets/9c67168d-358b-49b7-918a-10dc35f42299" />
+
+### 🛡️ Blue Team: Detection & Analysis
+1. XDR Critical Incident: sAMAccountName Spoofing
+The Defender XDR portal generated a High-Severity alert that mapped the entire attack chain in a single view.
+
+Alert Name: Suspicious modification of a sAMAccountName attribute (CVE-2021-42278 and CVE-2021-42287 exploitation).
+
+Detection Source: Microsoft Defender for Identity.
+
+Alert Logic: The sensor detected that Jon Snow changed the sAMAccountName of the computer account SYSKEY to the name of the Domain Controller, WINTERFELL.
+
+Visual Evidence: The Alert Graph clearly shows the transition from the user account to the spoofed machine identity.
+
+<img width="1919" height="965" alt="image" src="https://github.com/user-attachments/assets/13373a3a-f1ec-478a-baf2-794b7c4bdbd4" />
