@@ -47,3 +47,5 @@ Objective: Identify accounts where the password matches the username, a common o
 Result: SUCCESS. Identified that the account north.sevenkingdoms.local\hodor is using the password hodor.
 
 📸 Evidence: Successful Password Spray
+<img width="1918" height="276" alt="image" src="https://github.com/user-attachments/assets/0007bea8-11bc-4c05-a71f-82f90b289e71" />
+
