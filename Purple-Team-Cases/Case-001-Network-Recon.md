@@ -31,21 +31,19 @@ Legacy Protocols: Detected SMBv1 enabled on multiple targets (e.g., MEEREEN, BRA
 <img width="1920" height="215" alt="image" src="https://github.com/user-attachments/assets/5b1ac58a-16bd-4b66-94ee-fba1d676b550" />
 
 ### 3. Domain Metadata Harvesting (NetExec)
-Following the initial port scan, NetExec (nxc) was utilized to perform unauthenticated enumeration across the .58 subnet to map the sevenkingdoms.local forest structure and identify exploitable misconfigurations.
+Following the initial scan, NetExec (nxc) was utilized to enumerate the sevenkingdoms.local forest structure and harvest active domain user lists.
 
 Command: nxc smb 192.168.58.0/24 --users
 
-Objective: Enumerate domain names, OS versions, SMB signing status, and harvest active domain user lists.
+Objective: Enumerate active users and extract metadata from Active Directory object descriptions.
 
 Key Findings:
 
-User Enumeration: Successfully enumerated 10 local users from the NORTH domain, including high-value targets like jon.snow and arya.stark.
+Plaintext Credential Leak: Discovered a critical security misconfiguration where a user password was stored in the AD Description field for samwell.tarly (Password: Heartsbane).
 
-Vulnerability Identification: Confirmed BRAAVOS (192.168.58.23) and CASTELBLACK (192.168.58.22) have SMB Signing Disabled (signing:False).
+User Harvesting: Successfully enumerated 10 local users from the NORTH domain, providing a roadmap for the next phase of the attack.
 
-Protocol Weakness: Detected SMBv1 and Null Authentication enabled on multiple targets, providing an immediate path for lateral movement.
+Vulnerability Identification: Confirmed BRAAVOS and CASTELBLACK have SMB Signing Disabled, which, combined with the leaked credentials, enables immediate lateral movement.
 
-Evidence:
-
-<img width="1920" height="215" alt="image" src="https://github.com/user-attachments/assets/5b1ac58a-16bd-4b66-94ee-fba1d676b550" />
-
+📸 Evidence: Credential Leak & User Enumeration
+<img width="1920" height="411" alt="image" src="https://github.com/user-attachments/assets/dca5cbbd-2de5-46ea-996c-79e3042f1edd" />
