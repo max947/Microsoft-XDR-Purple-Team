@@ -91,4 +91,4 @@ Alert Logic: The sensor detected that Jon Snow changed the sAMAccountName of the
 Visual Evidence: The Alert Graph clearly shows the transition from the user account to the spoofed machine identity.
 
 <img width="1919" height="965" alt="image" src="https://github.com/user-attachments/assets/13373a3a-f1ec-478a-baf2-794b7c4bdbd4" />
-#### The Defender portal showing the high-fidelity detection of the spoofing attempt by Jon Snow.
+####  The Defender portal showing the high-fidelity detection of the spoofing attempt by Jon Snow.
