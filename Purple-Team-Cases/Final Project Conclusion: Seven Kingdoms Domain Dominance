@@ -5,3 +5,11 @@ Privilege Esc.,sAMAccountName Spoofing,renameMachine.py,Exploited CVE-2021-42278
 Domain Dominance,DCSync / NTDS Dumping,secretsdump.py,Full Domain Credential Extraction
 App Exploitation,MSSQL xp_cmdshell RCE,mssqlclient.py,OS-level code execution as sql_svc
 Persistence,Golden Ticket Forgery,ticketer.py,Undocumented Domain Access
+
+
+### Remediation & Hardening
+Enforce SMB Signing: Stops the relay attacks used to pivot across servers.
+
+Rotate KRBTGT: A double-reset of the krbtgt password is now required to invalidate forged tickets.
+
+Tiered Administration: Ensure high-privileged accounts never log in to lower-tier workstations.
