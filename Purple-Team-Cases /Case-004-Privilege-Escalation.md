@@ -114,4 +114,4 @@ robb.stark: 1113:aad3b435b1404eeaad3b435b1404ee:831486ac7f26860c9e2f51ac91e1a07a
 
 📸 Evidence: Final DCSync and Domain Hash Extraction
 <img width="1779" height="815" alt="image" src="https://github.com/user-attachments/assets/189a0770-f439-462e-a9d9-361870aa4fcb" />
-
+secretsdump.py output confirming the successful extraction of high-privileged NTLM hashes from the Domain Controller.
