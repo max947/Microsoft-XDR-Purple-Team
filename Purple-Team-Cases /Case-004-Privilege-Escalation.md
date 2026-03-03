@@ -1,4 +1,4 @@
-🏛️ # Case 004: Privilege Escalation (Resource-Based Constrained Delegation)
+# 🏛️ Case 004: Privilege Escalation (Resource-Based Constrained Delegation)
 📑 Executive Summary
 Objective: To escalate privileges from a standard domain user to a local administrator on a target server by exploiting the MachineAccountQuota and Resource-Based Constrained Delegation (RBCD).
 
