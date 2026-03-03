@@ -12,7 +12,7 @@ The attacker initiated an aggressive service and script scan to map the internal
 > **<img width="1919" height="1020" alt="image" src="https://github.com/user-attachments/assets/a540b80a-04f5-4159-a94b-3531f207a2b6" />
 **
 
-### **2. Domain Metadata Harvesting (NetExec)
+### 2. Domain Metadata Harvesting (NetExec)
 Following the initial port scan, NetExec (nxc) was utilized to perform unauthenticated enumeration across the .58 subnet to map the sevenkingdoms.local forest structure and identify misconfigurations.
 
 Command: nxc smb 192.168.58.0/24
