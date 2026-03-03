@@ -35,3 +35,14 @@ Evidence: The portal flagged multiple anomalous TGT requests originating from th
 
 📸 Evidence: M365 Defender Security Alert
 <img width="1618" height="910" alt="image" src="https://github.com/user-attachments/assets/7fb6a421-10b1-47cf-bbac-01683178fef7" />
+
+3. Password Spraying (NetExec)
+Using the username list harvested during the reconnaissance phase, a targeted password spray was conducted to identify accounts utilizing weak or default credentials.
+
+Command: nxc smb 192.168.58.11 -u users.txt -p users.txt --no-bruteforce
+
+Objective: Identify accounts where the password matches the username, a common occurrence in lab environments and misconfigured production domains.
+
+Result: SUCCESS. Identified that the account north.sevenkingdoms.local\hodor is using the password hodor.
+
+📸 Evidence: Successful Password Spray
