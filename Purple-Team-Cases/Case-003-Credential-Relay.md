@@ -1,4 +1,4 @@
-### Case 003: Credential Relay (LLMNR Poisoning & SMB Relay)
+## Case 003: Credential Relay (LLMNR Poisoning & SMB Relay)
 Red Team: Attack Simulation
 1. LLMNR/mDNS Poisoning (Responder)
 The attacker deployed Responder to listen for broadcast name resolution requests. By spoofing responses for non-existent resources like Bravos.local and Meren.local, the attacker forced victim workstations to attempt authentication against the attacker-controlled machine.
