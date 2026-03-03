@@ -21,3 +21,15 @@ ticketer.py -nthash f5b67d3ddc972f36a2384eb24748c292 -domain-sid S-1-5-21-396417
 Result: Created a file named Administrator.ccache.
 
 Persistence: This ticket is valid for 10 years by default, providing long-term access regardless of account password changes.
+<img width="1919" height="310" alt="image" src="https://github.com/user-attachments/assets/bcc8e4c5-ceb3-4407-b5a6-e9b453a9a5ed" />
+Successful generation and signing of a forged TGT for the north.sevenkingdoms.local domain.
+
+### Blue Team: Detection & Analysis
+1. XDR Incident Correlation
+Your Defender XDR Alerts dashboard (image_53865d.png) provides a chronological map of the entire operation. While the Golden Ticket itself is designed for stealth, the preceding activities are highly visible:
+
+Critical Detection: "Suspicious modification of a sAMAccountName..." (CVE-2021-42278).
+
+Credential Access: "Possible Kerberoasting LDAP reconnaissance" and "AS-REP roasting."
+
+Command & Control: "Indication of local security authority secrets theft" (detected on CASTELBLACK).
