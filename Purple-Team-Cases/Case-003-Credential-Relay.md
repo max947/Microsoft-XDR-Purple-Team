@@ -46,7 +46,7 @@ DPAPI Information: Successfully retrieved DPAPI master keys, enabling the decryp
 📸 Evidence: Secretsdump Output via SOCKS
 <img width="1912" height="850" alt="image" src="https://github.com/user-attachments/assets/70693eec-0ace-45fd-b5c0-c8214d6955a1" />
 
-🛡️ Blue Team: Detection & Analysis
+🛡️ Blue Team: Detection
 1. XDR Incident: LSA Secrets Theft Detection
 The execution of secretsdump against CASTELBLACK triggered multiple high-fidelity alerts in the Microsoft 365 Defender portal.
 
