@@ -20,3 +20,18 @@ Recovered Password: iseedeadpeople
 
 📸 Evidence: Successful Credential Recovery
 <img width="1919" height="596" alt="image" src="https://github.com/user-attachments/assets/ee42923a-fed5-4235-a588-75ae456fd5d3" />
+
+🛡️ Blue Team: Detection & Analysis
+1. XDR Incident Validation
+The AS-REP Roasting attack against brandon.stark was immediately identified by Microsoft Defender for Identity.
+
+Alert Name: Suspicious Kerberos authentication (AS-REQ)
+
+Detection Source: Microsoft Defender for Identity
+
+MITRE ATT&CK Mapping: T1558.004 (AS-REP Roasting)
+
+Evidence: The portal flagged multiple anomalous TGT requests originating from the attacker machine (192.168.58.1), providing clear visibility into the credential harvesting attempt.
+
+📸 Evidence: M365 Defender Security Alert
+<img width="1618" height="910" alt="image" src="https://github.com/user-attachments/assets/7fb6a421-10b1-47cf-bbac-01683178fef7" />
