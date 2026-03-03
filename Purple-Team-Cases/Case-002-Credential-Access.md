@@ -1,4 +1,4 @@
-🔐 Case 002: Credential Access (AS-REP Roasting & Kerberoasting)
+### Case 002: Credential Access (AS-REP Roasting & Kerberoasting)
 ⚔️ Red Team: Attack Simulation
 1. AS-REP Roasting (Impacket)
 Using the username list harvested in Case 001, an AS-REP Roast was performed to identify accounts vulnerable to credential harvesting without authentication.
