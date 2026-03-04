@@ -35,9 +35,35 @@ Evidence: The portal flagged multiple anomalous TGT requests originating from th
 
 📸 Evidence: M365 Defender Security Alert
 <img width="1890" height="916" alt="image" src="https://github.com/user-attachments/assets/40248626-0505-4bc2-a02d-6f390c0fc7ae" />
+### SOC Analyst: Incident Handling & Remediation
+1. Threat Classification & Validation
+Upon receiving the AS-REP Roasting alert (image_bdb160.png), the incident was investigated and validated as a True Positive.
 
+Classification: Marked as True Positive -> Multi-staged attack (image_bda1fd.png).
 
-3. Password Spraying (NetExec)
+Impact Assessment: Confirmed that the account north.sevenkingdoms.local\brandon.stark was vulnerable due to missing Kerberos pre-authentication, leading to a successful offline password crack.
+
+2. Identity Containment & Recovery
+To prevent further exploitation and lateral movement, the following identity containment actions were executed immediately:
+
+Account Disabling: Disabled the brandon.stark account in Active Directory to kill all current on-premises sessions.
+
+Entra ID Synchronization: Verified the account status in Microsoft Entra ID and disabled the cloud identity to block access to integrated SaaS applications.
+
+Credential Invalidation: Triggered a Force Password Change on the next logon, ensuring the attacker's current plaintext password is no longer valid.
+
+3. Evidence of Success
+XDR Alert State: The alert status has been updated to In Progress and assigned to a specialized analyst for final review (image_53865d.png).
+
+Detection Efficacy: The Microsoft Defender for Identity sensor correctly identified the anomalous AS-REQ requests, providing the precise timestamp and source IP (192.168.58.1) required for host isolation.
+
+4. Long-Term Hardening (Post-Incident)
+Vulnerability Eradication: Conducted a domain-wide audit to ensure no other accounts remain configured with UF_DONT_REQUIRE_PREAUTH.
+
+Conditional Access: Proposed a new Conditional Access Policy requiring MFA for all logins originating from non-compliant devices to prevent future credential-only compromises.
+<img width="1919" height="954" alt="image" src="https://github.com/user-attachments/assets/ac0ad024-3d5c-43f3-bf6f-b6cfad085835" />
+
+### 3. Password Spraying (NetExec)
 Using the username list harvested during the reconnaissance phase, a targeted password spray was conducted to identify accounts utilizing weak or default credentials.
 
 Command: nxc smb 192.168.58.11 -u users.txt -p users.txt --no-bruteforce
