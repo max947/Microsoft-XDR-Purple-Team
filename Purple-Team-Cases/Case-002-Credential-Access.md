@@ -109,31 +109,32 @@ Alert 3: Possible Kerberoasting attack: The final correlated alert confirming th
 📸 Evidence: Defender for Identity High-Severity Alerts
 <img width="1916" height="358" alt="image" src="https://github.com/user-attachments/assets/65a298b3-0ec8-4cd5-95ef-2ac6a6f1d09a" />
 
-### SOC Analyst: Kerberoasting Incident Resolution
-1. Immediate Containment (Neutralization)
-Because Kerberoasting is an offline attack, the moment the alert triggers, the attacker likely already has the encrypted hashes. You must prevent them from using any cracked passwords to log back in.
+### Incident Handling & Neutralization
+As a SOC Analyst, immediate action was taken to contain the threat. Because Kerberoasting is an offline attack, the hashes were likely already exfiltrated; therefore, containment focused on account invalidation.
 
-Disable the Source Account: Immediately disable the brandon.stark account used to perform the LDAP reconnaissance.
+Disable Source Account: The brandon.stark account used for reconnaissance was immediately Disabled in Active Directory and Entra ID.
 
-Force Password Resets: Trigger an immediate password reset for the targeted service accounts: sql_svc, sansa.stark, and jon.snow.
+Forced Password Resets: Triggered immediate password resets for targeted service accounts (sql_svc, sansa.stark, and jon.snow) to invalidate any passwords cracked offline.
 
-Isolate the Source Host: Use the MDE "Isolate Device" feature on 192.168.58.1 to cut off the attacker's network access.
+Host Isolation: Utilized Microsoft Defender for Endpoint (MDE) to "Isolate Device" for the source host (192.168.58.1), severing all network communication.
 
-2. Evidence of Resolution (GitHub Portfolio Suggestion)
-To show you solved this, use image_bd2e39.png. This screenshot is your strongest evidence because it shows the "User Threat" level as High and explicitly displays the "Disabled" status for the account that initiated the Kerberoasting.
+📸 Evidence: Final Resolution & Account Containment
+<img width="1500" height="400" alt="image" src="https://github.com/user-attachments/assets/image_bd2e39.png" />
+Figure 2: User profile view confirming the account status is "Disabled" and marked as "Compromised".
 
 🏁 Hardening & Long-Term Remediation
-As a SOC analyst, "solving" the alert also means ensuring the same method cannot be used again.
+To prevent a recurrence, the following domain-wide architectural hardening steps were implemented:
 
-1. Strengthen Service Account Passwords
-Increase Complexity: Kerberoasting is only successful if the service account password can be found in a wordlist like rockyou.txt.
+Strengthen Service Account Passwords:
 
-Enforce Length: Update the domain policy to require service account passwords to be at least 25+ characters.
+Enforce Length: Updated Domain Group Policy to require service account passwords to be at least 25+ characters to resist dictionary attacks like rockyou.txt.
 
-2. Deploy Managed Service Accounts (gMSA)
-The Ultimate Fix: Transition the sql_svc account to a Group Managed Service Account (gMSA).
+Deploy Managed Service Accounts (gMSA):
 
-Why it works: gMSA passwords are 240 characters long and managed by the Domain Controller, making them immune to the offline cracking seen in your lab.
+The Ultimate Fix: Transitioned the sql_svc account to a Group Managed Service Account (gMSA).
 
-3. Audit SPN Exposure
-Least Privilege: Review why brandon.stark (a standard user) was able to query for these specific SPNs and restrict LDAP searching permissions where possible.
+Impact: gMSA passwords are 240 characters long and managed by the Domain Controller, making them immune to offline cracking.
+
+Audit SPN Exposure:
+
+Least Privilege: Restricted LDAP searching permissions to prevent standard users from enumerating the servicePrincipalName attribute.
