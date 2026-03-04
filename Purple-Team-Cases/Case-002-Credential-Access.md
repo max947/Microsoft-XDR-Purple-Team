@@ -108,3 +108,32 @@ Alert 3: Possible Kerberoasting attack: The final correlated alert confirming th
 
 📸 Evidence: Defender for Identity High-Severity Alerts
 <img width="1916" height="358" alt="image" src="https://github.com/user-attachments/assets/65a298b3-0ec8-4cd5-95ef-2ac6a6f1d09a" />
+
+### SOC Analyst: Kerberoasting Incident Resolution
+1. Immediate Containment (Neutralization)
+Because Kerberoasting is an offline attack, the moment the alert triggers, the attacker likely already has the encrypted hashes. You must prevent them from using any cracked passwords to log back in.
+
+Disable the Source Account: Immediately disable the brandon.stark account used to perform the LDAP reconnaissance.
+
+Force Password Resets: Trigger an immediate password reset for the targeted service accounts: sql_svc, sansa.stark, and jon.snow.
+
+Isolate the Source Host: Use the MDE "Isolate Device" feature on 192.168.58.1 to cut off the attacker's network access.
+
+2. Evidence of Resolution (GitHub Portfolio Suggestion)
+To show you solved this, use image_bd2e39.png. This screenshot is your strongest evidence because it shows the "User Threat" level as High and explicitly displays the "Disabled" status for the account that initiated the Kerberoasting.
+
+🏁 Hardening & Long-Term Remediation
+As a SOC analyst, "solving" the alert also means ensuring the same method cannot be used again.
+
+1. Strengthen Service Account Passwords
+Increase Complexity: Kerberoasting is only successful if the service account password can be found in a wordlist like rockyou.txt.
+
+Enforce Length: Update the domain policy to require service account passwords to be at least 25+ characters.
+
+2. Deploy Managed Service Accounts (gMSA)
+The Ultimate Fix: Transition the sql_svc account to a Group Managed Service Account (gMSA).
+
+Why it works: gMSA passwords are 240 characters long and managed by the Domain Controller, making them immune to the offline cracking seen in your lab.
+
+3. Audit SPN Exposure
+Least Privilege: Review why brandon.stark (a standard user) was able to query for these specific SPNs and restrict LDAP searching permissions where possible.
