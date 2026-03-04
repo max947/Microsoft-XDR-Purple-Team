@@ -74,3 +74,37 @@ Administrative Exposure: Verified that standard administrative shares (C$, ADMIN
 
 📸 Evidence: Unauthenticated Share Discovery
 <img width="1912" height="643" alt="image" src="https://github.com/user-attachments/assets/47081218-671a-4501-933b-f5bd0e652c79" />
+
+### 🛡️ Blue Team: Remediation & Hardening
+1. Disabling Legacy Protocols (LLMNR/NetBIOS)
+The attacker relied on the network's ability to broadcast identity requests. Disabling these legacy protocols prevents an attacker from "poisoning" name resolution to intercept credentials.
+
+Action: Disable LLMNR (Link-Local Multicast Name Resolution) via Group Policy: Computer Configuration -> Administrative Templates -> Network -> DNS Client -> Turn off multicast name resolution.
+
+Action: Disable NetBIOS over TCP/IP on all network adapters via DHCP options or manual configuration.
+
+2. Enforcing SMB Signing (Mitigating Relay)
+The discovery of signing:False on BRAAVOS and CASTELBLACK is a critical vulnerability that allows NTLM Relay attacks.
+
+Action: Enable SMB Signing Required via GPO for both Clients and Servers: Microsoft network server: Digitally sign communications (always) set to Enabled.
+
+Impact: This cryptographically signs SMB packets, ensuring that an attacker cannot intercept and "relay" a session to another machine.
+
+3. Restricting Unauthenticated (Null) Sessions
+The attacker successfully used a "null session" strategy (-u 'a' -p '') to enumerate shares on CASTELBLACK.
+
+Action: Restrict anonymous access to SMB shares and named pipes via Security Options: Network access: Restrict anonymous access to Named Pipes and Shares set to Enabled.
+
+Action: Ensure Network access: Do not allow anonymous enumeration of SAM accounts and shares is set to Enabled.
+
+4. Cleaning Active Directory Metadata
+The leak of the password Heartsbane in the samwell.tarly description field is a major human-error risk.
+
+Action: Run a PowerShell audit script to scan all Active Directory object "Description" and "Notes" fields for keywords like "Password", "PWD", or "Credentials".
+
+Action: Implement a Service Account Policy that forbids the storage of any sensitive data in non-secret attributes.
+
+5. Network Segmentation & Monitoring
+Segmentation: Place high-value assets like WINTERFELL (DC) and database servers in isolated VLANs to prevent lateral scanning from standard workstations.
+
+SOC Alerting: Configure Microsoft Sentinel to alert on internal "Port Sweeps" (Event ID 4624/4625 spikes) originating from a single internal IP.
