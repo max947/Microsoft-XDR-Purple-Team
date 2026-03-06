@@ -37,7 +37,7 @@ Evidence: The portal flagged multiple anomalous TGT requests originating from th
 <img width="1890" height="916" alt="image" src="https://github.com/user-attachments/assets/40248626-0505-4bc2-a02d-6f390c0fc7ae" />
 ### SOC Analyst: Incident Handling & Remediation
 1. Threat Classification & Validation
-Upon receiving the AS-REP Roasting alert (image_bdb160.png), the incident was investigated and validated as a True Positive.
+Upon receiving the AS-REP Roasting alert, the incident was investigated and validated as a True Positive.
 
 Classification: Marked as True Positive -> Multi-staged attack (image_bda1fd.png).
 
