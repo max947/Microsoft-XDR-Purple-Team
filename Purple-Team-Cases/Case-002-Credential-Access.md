@@ -53,7 +53,7 @@ Entra ID Synchronization: Verified the account status in Microsoft Entra ID and 
 Credential Invalidation: Triggered a Force Password Change on the next logon, ensuring the attacker's current plaintext password is no longer valid.
 
 3. Evidence of Success
-XDR Alert State: The alert status has been updated to In Progress and assigned to a specialized analyst for final review (image_53865d.png).
+XDR Alert State: The alert status has been updated to In Progress and assigned to a specialized analyst for final review.
 
 Detection Efficacy: The Microsoft Defender for Identity sensor correctly identified the anomalous AS-REQ requests, providing the precise timestamp and source IP (192.168.58.1) required for host isolation.
 
