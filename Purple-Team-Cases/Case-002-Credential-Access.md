@@ -1,5 +1,5 @@
 ## Case 002: Credential Access (AS-REP Roasting & Kerberoasting)
-⚔️ Red Team: Attack Simulation
+### ⚔️ Red Team: Attack Simulation
 1. AS-REP Roasting (Impacket)
 Using the username list harvested in Case 001, an AS-REP Roasting attack was performed to identify accounts vulnerable to credential harvesting without requiring prior authentication.
 
@@ -21,7 +21,7 @@ Recovered Password: iseedeadpeople
 📸 Evidence: Successful Credential Recovery
 <img width="1919" height="596" alt="image" src="https://github.com/user-attachments/assets/ee42923a-fed5-4235-a588-75ae456fd5d3" />
 
-🛡️ Blue Team: Detection & Analysis
+## 🛡️ Blue Team: Detection & Analysis
 1. XDR Incident Validation
 The attack against brandon.stark was immediately flagged by Microsoft Defender for Identity (MDI).
 
@@ -36,7 +36,7 @@ Analysis: The portal flagged multiple anomalous TGT requests originating from th
 📸 Evidence: M365 Defender Security Alert
 <img width="1890" height="916" alt="image" src="https://github.com/user-attachments/assets/40248626-0505-4bc2-a02d-6f390c0fc7ae" />
 
-🕵️ SOC Analyst: Incident Handling & Remediation
+## 🕵️ SOC Analyst: Incident Handling & Remediation
 1. Threat Classification
 Upon investigation, the incident was validated as a True Positive.
 
@@ -84,7 +84,7 @@ Cracking Result: CRACKED — Password for jon.snow recovered: iknownothing.
 📸 Evidence: Authenticated Kerberoasting Results
 <img width="1919" height="937" alt="image" src="https://github.com/user-attachments/assets/a853b2a2-56f0-48a4-beae-31c6ff62450b" />
 
-🛡️ Blue Team: Response & Neutralization
+## 🛡️ Blue Team: Response & Neutralization
 1. Defender XDR Correlation
 The MDI sensor flagged the Kerberoasting lifecycle in real-time across three distinct stages:
 
